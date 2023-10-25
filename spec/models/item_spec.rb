@@ -100,25 +100,25 @@ RSpec.describe Item, type: :model do
       it '販売価格が全角数字で入力されている' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
 
       it '販売価格が数字以外で入力されている' do
         @item.price = '三百'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
 
       it '販売価格が299円以下になっている' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
 
       it '販売価格が10000000円以上になっている' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
     end
   end
