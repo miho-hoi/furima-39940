@@ -1,6 +1,6 @@
 class PurchaseRecordDeliveryAddress
 
-  include ActiveModel::module ModuleName
+  include ActiveModel::Model
   attr_accessor :postal_code, :region_id, :city, :block, :building_name, :phone_number, :user_id, :item_id
   
   with_options presence: true do
