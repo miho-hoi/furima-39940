@@ -38,7 +38,7 @@
 - belongs_to :user
 - has_one :purchase_record
 
-##　purchase_records
+##　purchase_recordsテーブル
 
 |Column |Type       |Options                        |
 |-------|-----------|-------------------------------|
