@@ -5,6 +5,9 @@ class PurchasesController < ApplicationController
 
   def index
     @purchase_address = PurchaseAddress.new
+    if user_signed_in? && @item.purchase != nil
+      redirect_to root_path
+    end
   end
 
   def create
