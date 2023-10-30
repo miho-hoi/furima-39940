@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    @purchase_address = FactoryBot.build(:purchase_address)
+    item = FactoryBot.create(:item)
+    user = FactoryBot.create(:user)
+    @purchase_address = FactoryBot.build(:purchase_address, item_id: item.id, user_id: user.id)
+    sleep(1)
   end
 
   describe '商品購入機能' do
@@ -87,6 +90,12 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include('Phone number is invalid.')
       end
 
+      it '電話番号が12桁以上になっている' do
+        @purchase_address.phone_number = '090123456789'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid.')
+      end
+      
       it '電話番号が全角数字で入力されている' do
         @purchase_address.phone_number = '０９０１１１１１１１１'
         @purchase_address.valid?
@@ -100,13 +109,13 @@ RSpec.describe PurchaseAddress, type: :model do
       end
 
       it 'userが紐づいていなければ出品できない' do
-        @purchase_address.user_id = ''
+        @purchase_address.user_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("User can't be blank")
       end
 
       it 'itemが紐づいていなければ出品できない' do
-        @purchase_address.item_id = ''
+        @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
