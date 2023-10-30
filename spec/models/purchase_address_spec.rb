@@ -15,7 +15,7 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.building_name = ''
         expect(@purchase_address).to be_valid
       end
-      
+
       it '郵便番号が半角数字の3桁-4桁で入力されている' do
         @purchase_address.postal_code = '111-1111'
         expect(@purchase_address).to be_valid
@@ -84,21 +84,21 @@ RSpec.describe PurchaseAddress, type: :model do
       it '電話番号が9桁以下になっている' do
         @purchase_address.phone_number = '090111111'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid.')
       end
 
       it '電話番号が全角数字で入力されている' do
         @purchase_address.phone_number = '０９０１１１１１１１１'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid.')
       end
 
       it '電話番号が数字以外で入力されている' do
         @purchase_address.phone_number = 'ゼロキュウゼロイチイチイチイチイ'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid.')
       end
-      
+
       it 'userが紐づいていなければ出品できない' do
         @purchase_address.user_id = ''
         @purchase_address.valid?
@@ -111,7 +111,7 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
 
-      it "tokenが空では登録できない" do
+      it 'tokenが空では登録できない' do
         @purchase_address.token = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
